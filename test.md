@@ -83,6 +83,7 @@ game
 │       ├── Init.server.lua                            ✅ Script
 │       │
 │       ├── Core/
+|       |   ├── AdminConfig.lua                        📦 ModuleScript
 │       │   ├── Config.lua                             📦 ModuleScript
 │       │   ├── Registry.lua                           📦 ModuleScript
 │       │   ├── Parser.lua                             📦 ModuleScript
