@@ -1,3 +1,4 @@
+```
 ServerScriptService/
 └── CommandX/
     ├── Init.server.lua              -- 系统入口，启动引导脚本
@@ -20,3 +21,4 @@ ServerScriptService/
     └── Util/
         ├── PlayerResolver.lua       -- 目标玩家解析（me、all、others、模糊匹配）
         └── Logger.lua               -- 轻量日志工具（warn/error 输出，可选 webhook）
+```
