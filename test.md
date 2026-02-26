@@ -1,90 +1,147 @@
 ```
-On-Site: Roleplay
+game/
+├── ReplicatedStorage/
+│   └── FrameworkX/
+│       ├── Kernel/
+│       │   ├── Bootstrap.luau
+│       │   ├── Container.luau           -- DI 容器
+│       │   ├── Lifecycle.luau           -- 生命周期管理器
+│       │   ├── Config.luau              -- 配置系统
+│       │   ├── ModuleLoader.luau        -- 模块加载器
+│       │   └── Types.luau               -- 全局类型定义
+│       │
+│       ├── Primitives/
+│       │   ├── Signal.luau
+│       │   ├── Promise.luau
+│       │   ├── Observable.luau          -- Value/Computed/ObservableList/Map
+│       │   ├── Mutex.luau
+│       │   ├── RWLock.luau
+│       │   ├── Semaphore.luau
+│       │   ├── RateLimiter.luau
+│       │   ├── ObjectPool.luau
+│       │   ├── Result.luau
+│       │   ├── Option.luau
+│       │   ├── BufferUtils.luau         -- BufferWriter/Reader
+│       │   ├── Timer.luau
+│       │   ├── Clock.luau
+│       │   ├── Throttle.luau
+│       │   └── Maid.luau               -- 清理器（自动管理析构）
+│       │
+│       ├── Core/
+│       │   ├── Network/
+│       │   │   ├── PacketRegistry.luau
+│       │   │   ├── Serializer.luau
+│       │   │   ├── Middleware.luau
+│       │   │   ├── Batcher.luau
+│       │   │   ├── NetServer.luau
+│       │   │   ├── NetClient.luau
+│       │   │   └── Types.luau
+│       │   │
+│       │   ├── Data/
+│       │   │   ├── DataService.luau
+│       │   │   ├── PlayerProfile.luau
+│       │   │   ├── Schema.luau
+│       │   │   ├── Migration.luau
+│       │   │   ├── SessionLock.luau
+│       │   │   ├── Cache.luau
+│       │   │   ├── Transaction.luau
+│       │   │   ├── RetryPolicy.luau
+│       │   │   ├── CircuitBreaker.luau
+│       │   │   ├── Adapters/
+│       │   │   │   ├── DataStoreAdapter.luau
+│       │   │   │   ├── OrderedDataStoreAdapter.luau
+│       │   │   │   ├── MemoryStoreAdapter.luau
+│       │   │   │   └── MockAdapter.luau
+│       │   │   └── Types.luau
+│       │   │
+│       │   ├── State/
+│       │   │   ├── Store.luau
+│       │   │   ├── Reducer.luau
+│       │   │   ├── Selector.luau
+│       │   │   ├── Middleware.luau
+│       │   │   ├── Replicator.luau
+│       │   │   ├── DeltaDiff.luau
+│       │   │   └── Types.luau
+│       │   │
+│       │   ├── ECS/
+│       │   │   ├── World.luau
+│       │   │   ├── Entity.luau
+│       │   │   ├── Component.luau
+│       │   │   ├── System.luau
+│       │   │   ├── Query.luau
+│       │   │   ├── Archetype.luau
+│       │   │   ├── CommandBuffer.luau
+│       │   │   ├── Observer.luau
+│       │   │   └── Types.luau
+│       │   │
+│       │   ├── Event/
+│       │   │   ├── EventBus.luau
+│       │   │   ├── EventChannel.luau
+│       │   │   └── Types.luau
+│       │   │
+│       │   ├── Scheduler/
+│       │   │   ├── TaskScheduler.luau
+│       │   │   ├── TimerWheel.luau
+│       │   │   ├── JobQueue.luau
+│       │   │   └── Types.luau
+│       │   │
+│       │   └── Logger/
+│       │       ├── Logger.luau
+│       │       ├── Profiler.luau
+│       │       ├── Metrics.luau
+│       │       ├── HealthCheck.luau
+│       │       ├── Sinks/
+│       │       │   ├── ConsoleSink.luau
+│       │       │   ├── MemoryRingSink.luau
+│       │       │   └── RemoteSink.luau
+│       │       └── Types.luau
+│       │
+│       ├── Services/
+│       │   ├── PlayerService.luau
+│       │   ├── SecurityService.luau
+│       │   ├── AssetService.luau
+│       │   ├── AnalyticsService.luau
+│       │   └── LocalizationService.luau
+│       │
+│       ├── Shared/
+│       │   ├── Constants.luau
+│       │   ├── Enums.luau
+│       │   ├── Errors.luau
+│       │   └── Utils.luau
+│       │
+│       └── init.luau                    -- 框架入口 (FrameworkX)
 │
-├── ServerScriptService
-│   └── CommandX/                                    -- 🔒 根节点 (Folder)
-│       │
-│       ├── Bootstrap.server.lua                     -- 唯一入口 (Script) — 引导内核启动
-│       │
-│       ├── Config/                                  -- ⚙️ 配置层 (Folder)
-│       │   ├── Settings.lua                         -- 全局静态配置 (ModuleScript)
-│       │   ├── Permissions.lua                      -- 权限声明表 (ModuleScript)
-│       │   └── Flags.lua                            -- 功能开关 / Feature Flags (ModuleScript)
-│       │
-│       ├── Kernel/                                  -- 🧠 内核层 (Folder) — 零业务逻辑
-│       │   ├── Lifecycle.lua                        -- 生命周期管理器 (ModuleScript)
-│       │   ├── ServiceLocator.lua                   -- IoC 服务定位器 (ModuleScript)
-│       │   ├── EventBus.lua                         -- 发布/订阅事件总线 (ModuleScript)
-│       │   └── ErrorBoundary.lua                    -- 全局异常边界 (ModuleScript)
-│       │
-│       ├── Services/                                -- 🔧 服务层 (Folder) — 单例有状态服务
-│       │   ├── InputService.lua                     -- 聊天输入监听适配器 (ModuleScript)
-│       │   ├── AuthService.lua                      -- 鉴权与权限裁决 (ModuleScript)
-│       │   ├── RateLimitService.lua                 -- 令牌桶限流 (ModuleScript)
-│       │   ├── SessionService.lua                   -- 玩家会话生命周期 (ModuleScript)
-│       │   ├── LogService.lua                       -- 结构化日志 (ModuleScript)
-│       │   └── SanctionService.lua                  -- 处罚执行 (ban/mute 持久化) (ModuleScript)
-│       │
-│       ├── Pipeline/                                -- 🔀 管道层 (Folder) — 命令处理流水线
-│       │   ├── Parser.lua                           -- 词法解析器 (ModuleScript)
-│       │   ├── Validator.lua                        -- 参数类型校验 (ModuleScript)
-│       │   ├── Resolver.lua                         -- 目标玩家解析 (ModuleScript)
-│       │   ├── Dispatcher.lua                       -- 命令分发执行器 (ModuleScript)
-│       │   └── Middleware/                           -- 中间件链 (Folder)
-│       │       ├── AuthMiddleware.lua               -- 权限检查中间件 (ModuleScript)
-│       │       ├── RateLimitMiddleware.lua           -- 限流中间件 (ModuleScript)
-│       │       ├── CooldownMiddleware.lua            -- 命令冷却中间件 (ModuleScript)
-│       │       └── AuditMiddleware.lua              -- 审计日志中间件 (ModuleScript)
-│       │
-│       ├── Registry/                                -- 📦 注册层 (Folder)
-│       │   ├── CommandRegistry.lua                  -- 命令注册表 (ModuleScript)
-│       │   ├── AliasRegistry.lua                    -- 别名映射表 (ModuleScript)
-│       │   └── PluginRegistry.lua                   -- 插件注册表 (ModuleScript)
-│       │
-│       ├── Commands/                                -- 📋 内置命令集 (Folder)
-│       │   ├── _Loader.lua                          -- 批量自动加载器 (ModuleScript)
-│       │   ├── Moderation/                          -- 管理域 (Folder)
-│       │   │   ├── Kick.lua                         -- (ModuleScript)
-│       │   │   ├── Ban.lua                          -- (ModuleScript)
-│       │   │   ├── Mute.lua                         -- (ModuleScript)
-│       │   │   └── Warn.lua                         -- (ModuleScript)
-│       │   ├── Movement/                            -- 传送域 (Folder)
-│       │   │   ├── Teleport.lua                     -- (ModuleScript)
-│       │   │   ├── Bring.lua                        -- (ModuleScript)
-│       │   │   └── To.lua                           -- (ModuleScript)
-│       │   ├── Character/                           -- 角色域 (Folder)
-│       │   │   ├── Kill.lua                         -- (ModuleScript)
-│       │   │   ├── Heal.lua                         -- (ModuleScript)
-│       │   │   ├── Speed.lua                        -- (ModuleScript)
-│       │   │   ├── Jump.lua                         -- (ModuleScript)
-│       │   │   └── ForceField.lua                   -- (ModuleScript)
-│       │   ├── Server/                              -- 服务器域 (Folder)
-│       │   │   ├── Shutdown.lua                     -- (ModuleScript)
-│       │   │   ├── ServerLock.lua                   -- (ModuleScript)
-│       │   │   └── Announce.lua                     -- (ModuleScript)
-│       │   └── Utility/                             -- 工具域 (Folder)
-│       │       ├── Help.lua                         -- (ModuleScript)
-│       │       ├── Commands.lua                     -- (ModuleScript)
-│       │       └── Info.lua                         -- (ModuleScript)
-│       │
-│       ├── Plugins/                                 -- 🔌 插件层 (Folder) — 热扩展区
-│       │   ├── _PluginLoader.lua                    -- 插件引导加载器 (ModuleScript)
-│       │   ├── _PluginAPI.lua                       -- 沙箱化插件接口 (ModuleScript)
-│       │   ├── _PluginTemplate.lua                  -- 插件开发模板 (ModuleScript)
-│       │   └── ExamplePlugin/                       -- 示例插件 (Folder)
-│       │       ├── Manifest.lua                     -- 插件元数据声明 (ModuleScript)
-│       │       └── Init.lua                         -- 插件入口 (ModuleScript)
-│       │
-│       └── Shared/                                  -- 📐 共享层 (Folder) — 纯函数/零状态
-│           ├── Types.lua                            -- 全局类型定义 (ModuleScript)
-│           ├── Constants.lua                        -- 枚举与常量 (ModuleScript)
-│           ├── StringUtil.lua                       -- 字符串工具 (ModuleScript)
-│           ├── TableUtil.lua                        -- 表操作工具 (ModuleScript)
-│           └── Guard.lua                            -- 类型守卫/断言 (ModuleScript)
+├── ServerScriptService/
+│   └── Server/
+│       ├── init.server.luau             -- 服务端启动脚本
+│       ├── Services/                    -- 游戏业务 Service
+│       │   ├── CombatService.luau
+│       │   ├── InventoryService.luau
+│       │   └── ...
+│       └── Systems/                     -- ECS Systems
+│           ├── DamageSystem.luau
+│           └── ...
 │
-└── ReplicatedStorage
-    └── CommandX/                                    -- 📡 客户端共享 (Folder)
-        ├── Types.lua                                -- 公开类型镜像 (ModuleScript)
-        └── Remotes/                                 -- 远程通信 (Folder)
-            └── Notify.lua                           -- 通知通道定义 (ModuleScript)
+├── StarterPlayer/
+│   └── StarterPlayerScripts/
+│       └── Client/
+│           ├── init.client.luau         -- 客户端启动脚本
+│           ├── Services/
+│           │   ├── InputService.luau    -- (覆盖/扩展内置)
+│           │   ├── UIService.luau
+│           │   └── ...
+│           ├── Controllers/             -- UI Controllers
+│           │   ├── HUDController.luau
+│           │   └── ...
+│           └── Systems/                 -- Client ECS Systems
+│               ├── RenderSystem.luau
+│               └── ...
+│
+└── ReplicatedStorage/
+    └── Shared/                          -- 业务共享代码
+        ├── Packets.luau                 -- 网络包定义
+        ├── Schemas.luau                 -- 数据 Schema 定义
+        ├── Actions.luau                 -- State Actions 定义
+        ├── Components.luau              -- ECS Component 定义
+        └── Config.luau                  -- 业务配置
 ```
