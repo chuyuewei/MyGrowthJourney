@@ -1,4 +1,8 @@
 ```
+Types → Signal → Promise → Result / Option → Mutex / Semaphore → ObjectPool → Buffer → Timer / Clock → Config → DI Container → Lifecycle → ModuleLoader → Bootstrap → Logger / Profiler
+```
+
+```
 game/
 ├── ReplicatedStorage/
 │   └── FrameworkX/
