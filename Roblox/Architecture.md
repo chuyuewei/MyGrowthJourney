@@ -1,457 +1,180 @@
 ``` text
-game (DataModel)
-│
+ggame (DataModel)
 │
 │ ══════════════════════════════════════════════════════════════════
-│  🌍 WORKSPACE — 设施 3D 世界
+│  🌍 WORKSPACE — 设施 3D 世界 (On-Site 六大扇区重构版)
 │ ══════════════════════════════════════════════════════════════════
 │
 ├── Workspace/
 │   │
-│   ├── _Runtime/                                    # 运行时动态物体
-│   │   ├── ActiveSCPs/                              # 当前活跃SCP实体
-│   │   ├── SpawnedNPCs/                             # 生成的NPC
-│   │   ├── DroppedItems/                            # 掉落物品
-│   │   ├── Projectiles/                             # 投射物
-│   │   ├── BreachEffects/                           # 收容失效特效
-│   │   ├── Corpses/                                 # 尸体(临时)
-│   │   └── TempDebris/                              # 临时碎片/破坏
+│   ├── _Runtime/                                    # 运行时动态物体 (保持不变)
+│   │   ├── ActiveSCPs/                              
+│   │   ├── SpawnedNPCs/                             
+│   │   ├── DroppedItems/                            
+│   │   ├── Projectiles/                             
+│   │   ├── BreachEffects/                           
+│   │   ├── Corpses/                                 
+│   │   └── TempDebris/                              
 │   │
-│   ├── Facility/                                    # ====== 设施主体 ======
+│   ├── Facility/                                    # ====== 设施主体结构 ======
 │   │   │
-│   │   ├── Exterior/                                # 设施外部
-│   │   │   ├── MainGate/                            # 主大门
-│   │   │   │   ├── GateStructure
-│   │   │   │   ├── GuardBooth
-│   │   │   │   ├── Barriers/
-│   │   │   │   ├── SecurityCheckpoint
-│   │   │   │   └── GateDoors/                       # 大门(可开关)
-│   │   │   ├── Perimeter/                           # 外围
-│   │   │   │   ├── Fencing/
-│   │   │   │   ├── WatchTowers/
-│   │   │   │   │   ├── WatchTower_N
-│   │   │   │   │   ├── WatchTower_S
-│   │   │   │   │   ├── WatchTower_E
-│   │   │   │   │   └── WatchTower_W
-│   │   │   │   ├── Searchlights/
-│   │   │   │   └── Minefield_Signs
-│   │   │   ├── Helipad/                             # 直升机停机坪
-│   │   │   ├── ParkingLot/                          # 停车场
-│   │   │   │   ├── MTF_Vehicles/
-│   │   │   │   └── Staff_Parking/
-│   │   │   ├── OutdoorRange/                        # 室外射击训练场
-│   │   │   ├── Forest/                              # 周围森林
-│   │   │   │   ├── Trees/
-│   │   │   │   ├── Paths/
-│   │   │   │   └── HiddenBunker                     # 隐藏掩体
-│   │   │   └── Roads/                               # 通往设施的道路
-│   │   │       ├── MainRoad
-│   │   │       └── EmergencyRoute
+│   │   ├── SectorA_ControlAndRiot/                  # 🟢 扇区 A: 管控与暴动区 (D级 & 安保)
+│   │   │   ├── ClassD_Block/                        # D级人员营房
+│   │   │   │   ├── CellBlock_Main                   # 大型上下铺集中区(防卡顿)
+│   │   │   │   ├── ClassD_Yard                      # 放风庭院/篮球场
+│   │   │   │   ├── ClassD_Showers                   # 淋浴间(经典暴动点)
+│   │   │   │   └── ContrabandStashes/               # 违禁品藏匿点(暗格)
+│   │   │   │
+│   │   │   ├── SecurityHQ/                          # 安保部指挥所
+│   │   │   │   ├── GuardSpawnArea                   # 安保出生点
+│   │   │   │   ├── Armory_Light                     # 轻型武器库(手枪/电击枪)
+│   │   │   │   ├── SectorA_CCTV                     # A区专属监控台
+│   │   │   │   └── InterrogationRooms/              # 审讯室(双面镜设计)
+│   │   │   │
+│   │   │   ├── EscortCorridors/                     # 押送走廊(超宽设计)
+│   │   │   │   ├── Checkpoint_A_to_E                # 通往测试区(E区)的重兵把守大门
+│   │   │   │   └── Checkpoint_A_to_D                # 通往中央枢纽(D区)的通道
+│   │   │   │
+│   │   │   └── HiddenVents/                         # 通风管道暗道(D级越狱用)
 │   │   │
-│   │   ├── EntranceZone/                            # ===== 入口区(EZ) =====
-│   │   │   ├── MainLobby/                           # 主大厅
-│   │   │   │   ├── ReceptionDesk
-│   │   │   │   ├── WaitingArea
-│   │   │   │   ├── SecurityScreening                # 安检
-│   │   │   │   ├── VisitorBadgeStation
-│   │   │   │   └── DirectoryBoard                   # 设施导览板
+│   │   ├── SectorB_RescueAndResearch/               # 🟣 扇区 B: 救援与研究区 (科研 & 医疗)
+│   │   │   ├── MedicalBay/                          # 核心医疗部
+│   │   │   │   ├── Med_SpawnArea                    # 医生出生点
+│   │   │   │   ├── EmergencyTriage                  # 紧急分诊大厅(大空间容纳伤员)
+│   │   │   │   ├── VirusQuarantineWards/            # 病毒隔离病房(玻璃墙)
+│   │   │   │   ├── SurgeryRooms/                    # 手术室
+│   │   │   │   ├── Morgue/                          # 停尸房(适合恐怖RP)
+│   │   │   │   └── BloodBank_Pharmacy               # 血库与药房
 │   │   │   │
-│   │   │   ├── AdministrationWing/                  # 行政区
-│   │   │   │   ├── SiteDirectorOffice/              # 设施主管办公室
-│   │   │   │   │   ├── Desk
-│   │   │   │   │   ├── FileCabinets
-│   │   │   │   │   ├── SecureTerminal               # 安全终端
-│   │   │   │   │   └── EmergencyPanel               # 紧急控制面板
-│   │   │   │   ├── O5CouncilRoom/                   # O5议会室
-│   │   │   │   │   ├── ConferenceTable
-│   │   │   │   │   ├── HolographicDisplay
-│   │   │   │   │   └── SecureVault                  # 高安全保险库
-│   │   │   │   ├── EthicsCommitteeRoom/             # 伦理委员会室
-│   │   │   │   ├── MeetingRooms/                    # 会议室
-│   │   │   │   │   ├── MeetingRoom_A
-│   │   │   │   │   ├── MeetingRoom_B
-│   │   │   │   │   └── BriefingRoom                 # 任务简报室
-│   │   │   │   ├── HROffice/                        # 人事办公室
-│   │   │   │   └── RecordsArchive/                  # 档案室
-│   │   │   │
-│   │   │   ├── SecurityOffice/                      # 安保办公室
-│   │   │   │   ├── SecurityDesk
-│   │   │   │   ├── WeaponLocker                     # 武器柜
-│   │   │   │   ├── CCTVMonitorRoom/                 # 监控室
-│   │   │   │   │   ├── MonitorWall                  # 监控墙
-│   │   │   │   │   ├── ControlConsole               # 控制台
-│   │   │   │   │   └── RecordingEquipment           # 录像设备
-│   │   │   │   ├── DetentionCells/                  # 拘留室
-│   │   │   │   │   ├── Cell_01
-│   │   │   │   │   ├── Cell_02
-│   │   │   │   │   └── Cell_03
-│   │   │   │   └── InterrogationRoom/               # 审讯室
-│   │   │   │
-│   │   │   ├── StaffAreas/                          # 员工区域
-│   │   │   │   ├── Cafeteria/                       # 食堂
-│   │   │   │   │   ├── ServingLine
-│   │   │   │   │   ├── SeatingArea
-│   │   │   │   │   └── Kitchen
-│   │   │   │   ├── StaffLounge/                     # 休息室
-│   │   │   │   │   ├── Sofas
-│   │   │   │   │   ├── VendingMachines
-│   │   │   │   │   ├── TVArea
-│   │   │   │   │   └── CoffeeMachine
-│   │   │   │   ├── StaffDormitories/                # 员工宿舍
-│   │   │   │   │   ├── Dorm_01
-│   │   │   │   │   ├── Dorm_02
-│   │   │   │   │   ├── Dorm_03
-│   │   │   │   │   └── Dorm_04
-│   │   │   │   └── Lockers/                         # 更衣柜
-│   │   │   │
-│   │   │   ├── MedicalBay/                          # 医疗区
-│   │   │   │   ├── ReceptionArea
-│   │   │   │   ├── ExamRooms/
-│   │   │   │   │   ├── ExamRoom_01
-│   │   │   │   │   └── ExamRoom_02
-│   │   │   │   ├── OperatingRoom/                   # 手术室
-│   │   │   │   ├── RecoveryWard/                    # 康复病房
-│   │   │   │   │   ├── Bed_01
-│   │   │   │   │   ├── Bed_02
-│   │   │   │   │   └── Bed_03
-│   │   │   │   ├── Pharmacy/                        # 药房
-│   │   │   │   ├── PsychologicalEvalRoom/           # 心理评估室
-│   │   │   │   ├── Morgue/                          # 太平间
-│   │   │   │   └── QuarantineRoom/                  # 隔离室
-│   │   │   │
-│   │   │   ├── Armory/                              # 军械库
-│   │   │   │   ├── WeaponRacks/
-│   │   │   │   ├── AmmunitionStorage/
-│   │   │   │   ├── EquipmentLockers/
-│   │   │   │   ├── GearUpStation/                   # 装备站
-│   │   │   │   └── ArmoryDesk                       # 军械管理台
-│   │   │   │
-│   │   │   ├── Checkpoints/                         # 检查站(EZ→LCZ)
-│   │   │   │   ├── Checkpoint_EZ_A/
-│   │   │   │   │   ├── ScannerGate                  # 扫描门
-│   │   │   │   │   ├── GuardStation
-│   │   │   │   │   └── BlastDoor                    # 防爆门
-│   │   │   │   └── Checkpoint_EZ_B/
-│   │   │   │
-│   │   │   ├── Elevators/                           # 电梯
-│   │   │   │   ├── Elevator_Main
-│   │   │   │   ├── Elevator_Staff
-│   │   │   │   └── Elevator_Emergency
+│   │   │   ├── ResearchLabs/                        # 科研部
+│   │   │   │   ├── Sci_SpawnArea                    # 科学家出生点
+│   │   │   │   ├── Lab_Biology                      # 生物/病毒化验室
+│   │   │   │   ├── Lab_Chemistry                    # 化学合成室
+│   │   │   │   ├── DataArchive                      # 资料档案库
+│   │   │   │   └── Safe_SCP_Storage/                # 安全级物品保管库(如万能药)
 │   │   │   │
 │   │   │   └── Corridors/                           # 走廊
-│   │   │       ├── Hallway_EZ_Main
-│   │   │       ├── Hallway_EZ_Admin
-│   │   │       └── Hallway_EZ_Medical
+│   │   │       └── Checkpoint_B_to_D                # 必须经过消毒程序的通道
 │   │   │
-│   │   ├── LightContainmentZone/                    # ===== 轻型收容区(LCZ) =====
+│   │   ├── SectorC_TacticalResponse/                # 🔵 扇区 C: 重装镇压区 (武装力量/MTF)
+│   │   │   ├── TacticalHQ/                          # 战术大本营(易守难攻)
+│   │   │   │   ├── Armed_SpawnArea                  # 武装人员出生点
+│   │   │   │   ├── Armory_Heavy                     # 重武器库(步枪/护甲/重火力)
+│   │   │   │   ├── BriefingRoom                     # 战术简报室(带全息地图)
+│   │   │   │   └── FiringRange                      # 室内射击训练场
 │   │   │   │
-│   │   │   ├── SCPChambers_Safe/                    # Safe级SCP收容室
-│   │   │   │   ├── SCP_500_Chamber/                 # SCP-500 万能药
-│   │   │   │   │   ├── ContainmentCell
-│   │   │   │   │   ├── ObservationWindow
-│   │   │   │   │   ├── AccessTerminal
-│   │   │   │   │   └── StatusDisplay
-│   │   │   │   ├── SCP_999_Chamber/                 # SCP-999 痒痒怪
-│   │   │   │   │   ├── PlayRoom
-│   │   │   │   │   ├── FeedingStation
-│   │   │   │   │   └── ObservationDeck
-│   │   │   │   ├── SCP_131_Chamber/                 # SCP-131 眼泪滴
-│   │   │   │   ├── SCP_529_Chamber/                 # SCP-529 半猫
-│   │   │   │   └── SCP_914_Chamber/                 # SCP-914 万能转换机
-│   │   │   │       ├── InputBooth
-│   │   │   │       ├── OutputBooth
-│   │   │   │       ├── ControlPanel                 # 精细/粗糙/1:1等
-│   │   │   │       └── ObservationRoom
-│   │   │   │
-│   │   │   ├── SCPChambers_Euclid_Light/            # 部分Euclid级
-│   │   │   │   ├── SCP_173_Chamber/                 # SCP-173 花生
-│   │   │   │   │   ├── ContainmentCell
-│   │   │   │   │   │   ├── SteelDoor
-│   │   │   │   │   │   └── FloodLights
-│   │   │   │   │   ├── CleaningSupplyRoom
-│   │   │   │   │   └── ObservationWindow
-│   │   │   │   ├── SCP_714_Chamber/                 # SCP-714 翡翠戒指
-│   │   │   │   └── SCP_330_Chamber/                 # SCP-330 糖果碗
-│   │   │   │
-│   │   │   ├── ClassD_Block/                        # D级人员区
-│   │   │   │   ├── ClassD_Cells/                    # D级牢房
-│   │   │   │   │   ├── Cell_D01
-│   │   │   │   │   ├── Cell_D02
-│   │   │   │   │   ├── Cell_D03
-│   │   │   │   │   ├── Cell_D04
-│   │   │   │   │   ├── Cell_D05
-│   │   │   │   │   ├── Cell_D06
-│   │   │   │   │   ├── Cell_D07
-│   │   │   │   │   └── Cell_D08
-│   │   │   │   ├── ClassD_Showers/                  # 淋浴间
-│   │   │   │   ├── ClassD_Yard/                     # 放风院
-│   │   │   │   ├── ClassD_Cafeteria/                # D级食堂
-│   │   │   │   └── ClassD_GuardStation              # 看守站
-│   │   │   │
-│   │   │   ├── TestingRooms/                        # 测试室
-│   │   │   │   ├── TestingRoom_A/                   # 标准测试室
-│   │   │   │   │   ├── ObservationBooth
-│   │   │   │   │   ├── TestingArea
-│   │   │   │   │   ├── RecordingEquipment
-│   │   │   │   │   └── EmergencyButton
-│   │   │   │   ├── TestingRoom_B/                   # 大型测试室
-│   │   │   │   ├── TestingRoom_C/                   # 生物测试室
-│   │   │   │   └── TestingRoom_Hazardous/           # 危险品测试室
-│   │   │   │
-│   │   │   ├── ResearchLabs/                        # 研究实验室
-│   │   │   │   ├── Lab_Biology/                     # 生物实验室
-│   │   │   │   ├── Lab_Chemistry/                   # 化学实验室
-│   │   │   │   ├── Lab_Physics/                     # 物理实验室
-│   │   │   │   ├── Lab_Anomalous/                   # 异常物品研究室
-│   │   │   │   └── Lab_DataAnalysis/                # 数据分析室
-│   │   │   │
-│   │   │   ├── StorageRooms/                        # 存储室
-│   │   │   │   ├── AnomalousItemStorage/            # 异常物品存储
-│   │   │   │   ├── SampleStorage/                   # 样本存储
-│   │   │   │   ├── EquipmentStorage/                # 设备存储
-│   │   │   │   └── JanitorCloset/                   # 清洁工具间
-│   │   │   │
-│   │   │   ├── Checkpoints/
-│   │   │   │   ├── Checkpoint_LCZ_HCZ/              # LCZ→HCZ检查站
-│   │   │   │   │   ├── HeavyBlastDoor_A
-│   │   │   │   │   ├── HeavyBlastDoor_B
-│   │   │   │   │   ├── DecontaminationChamber       # 消毒室
-│   │   │   │   │   └── ScannerGate
-│   │   │   │   └── Checkpoint_LCZ_ClassD/           # 进入D级区域检查站
-│   │   │   │
-│   │   │   └── Corridors/
-│   │   │       ├── Hallway_LCZ_Main
-│   │   │       ├── Hallway_LCZ_Cells
-│   │   │       ├── Hallway_LCZ_Labs
-│   │   │       ├── TCrossing_LCZ_01
-│   │   │       └── Corner_LCZ_01
+│   │   │   └── RapidDeployment/                     # 快速响应通道
+│   │   │       ├── Catwalk_Overwatch                # 俯瞰A区和E区的高空步道
+│   │   │       ├── Elevator_To_SectorA              # 直达A区镇压暴动的电梯
+│   │   │       └── Elevator_To_SectorE              # 直达E区处理收容失效的电梯
 │   │   │
-│   │   ├── HeavyContainmentZone/                    # ===== 重型收容区(HCZ) =====
+│   │   ├── SectorD_FacilityHeart/                   # 🟢 扇区 D: 设施心脏与枢纽 (文职/后勤)
+│   │   │   ├── CentralAtrium                        # 🏛️ 中央十字大厅 (百人服缓冲极宽阔区域)
+│   │   │   ├── CivilianOffices/                     # 文职出生与办公区
+│   │   │   │   ├── Civ_SpawnArea                    # 文职人员出生点
+│   │   │   │   ├── AdminOffices                     # 行政办公室
+│   │   │   │   └── MainCafeteria                    # 主餐厅(全图最大中立RP聚集点)
 │   │   │   │
-│   │   │   ├── SCPChambers_Euclid/                  # Euclid级SCP收容室
-│   │   │   │   ├── SCP_049_Chamber/                 # SCP-049 瘟疫医生
-│   │   │   │   │   ├── ContainmentCell
-│   │   │   │   │   │   ├── ReinforcedDoor
-│   │   │   │   │   │   ├── Desk
-│   │   │   │   │   │   └── Bookshelf
-│   │   │   │   │   ├── ObservationRoom
-│   │   │   │   │   ├── InterviewRoom
-│   │   │   │   │   └── BodyStorageRoom              # 049-2 存放室
-│   │   │   │   │
-│   │   │   │   ├── SCP_096_Chamber/                 # SCP-096 害羞的家伙
-│   │   │   │   │   ├── SteelReinforcedCell
-│   │   │   │   │   │   ├── NoWindows                # 无窗户
-│   │   │   │   │   │   └── AudioSensors
-│   │   │   │   │   ├── Camera_NoVisual              # 无视觉摄像头(仅音频)
-│   │   │   │   │   └── EmergencyLockdown
-│   │   │   │   │
-│   │   │   │   ├── SCP_939_Chamber/                 # SCP-939 众多声音
-│   │   │   │   │   ├── SoundproofCell
-│   │   │   │   │   ├── FeedingChute
-│   │   │   │   │   └── PressureSensors
-│   │   │   │   │
-│   │   │   │   ├── SCP_066_Chamber/                 # SCP-066
-│   │   │   │   └── SCP_457_Chamber/                 # SCP-457 燃烧人
-│   │   │   │       ├── FireproofCell
-│   │   │   │       ├── SprinklerSystem
-│   │   │   │       └── TemperatureSensors
+│   │   │   ├── LogisticsAndPower/                   # 后勤与动力区
+│   │   │   │   ├── ReactorCore/                     # 主反应堆/发电机房(可被破坏导致停电)
+│   │   │   │   ├── WaterTreatment                   # 水循环处理室
+│   │   │   │   ├── MaintenanceTunnels               # 维修通道(文职工程师专属路线)
+│   │   │   │   └── JanitorClosets                   # 全图分布的清洁工具间
 │   │   │   │
-│   │   │   ├── SCPChambers_Keter/                   # Keter级SCP收容室
-│   │   │   │   ├── SCP_682_Chamber/                 # SCP-682 不灭孽蜥
-│   │   │   │   │   ├── AcidTank                     # 酸液槽
-│   │   │   │   │   ├── ReinforcedContainment
-│   │   │   │   │   │   ├── TitaniumWalls
-│   │   │   │   │   │   ├── ElectricGrid
-│   │   │   │   │   │   └── BackupContainment
-│   │   │   │   │   ├── ObservationDeck
-│   │   │   │   │   ├── DrainageSystem
-│   │   │   │   │   └── EmergencyPurge
-│   │   │   │   │
-│   │   │   │   ├── SCP_106_Chamber/                 # SCP-106 恐怖老人
-│   │   │   │   │   ├── LeadLinedCell
-│   │   │   │   │   ├── FemurBreaker/                # 断股装置
-│   │   │   │   │   │   ├── ControlPanel
-│   │   │   │   │   │   ├── LureCell
-│   │   │   │   │   │   └── ActivationButton
-│   │   │   │   │   ├── CorrosionSensors
-│   │   │   │   │   └── ContainmentGrid
-│   │   │   │   │
-│   │   │   │   └── SCP_035_Chamber/                 # SCP-035 恶魔面具
-│   │   │   │       ├── SealedGlassCase
-│   │   │   │       ├── CorrosionDrains
-│   │   │   │       └── PsychicShielding
-│   │   │   │
-│   │   │   ├── ServerRoom/                          # 服务器机房
-│   │   │   │   ├── ServerRacks/
-│   │   │   │   ├── CoolingSystem
-│   │   │   │   ├── MainTerminal                     # 主终端
-│   │   │   │   └── BackupGenerator
-│   │   │   │
-│   │   │   ├── NuclearWarheadSilo/                  # 核弹头发射井
-│   │   │   │   ├── WarheadRoom
-│   │   │   │   │   ├── WarheadDevice
-│   │   │   │   │   ├── ActivationPanel              # 启动面板
-│   │   │   │   │   │   ├── KeySlot_A
-│   │   │   │   │   │   ├── KeySlot_B
-│   │   │   │   │   │   └── DetonateButton
-│   │   │   │   │   ├── CountdownDisplay             # 倒计时显示
-│   │   │   │   │   └── CancelButton                 # 取消按钮
-│   │   │   │   ├── WarheadArmory
-│   │   │   │   └── BlastShelter                     # 防爆掩体
-│   │   │   │
-│   │   │   ├── GeneratorRooms/                      # 发电机房
-│   │   │   │   ├── Generator_01
-│   │   │   │   ├── Generator_02
-│   │   │   │   ├── Generator_03
-│   │   │   │   ├── MainPowerSwitch
-│   │   │   │   └── BackupPowerSwitch
-│   │   │   │
-│   │   │   ├── MTF_Quarters/                        # MTF 驻地
-│   │   │   │   ├── ReadyRoom/                       # 待命室
-│   │   │   │   ├── Barracks/                        # 营房
-│   │   │   │   ├── TrainingRoom/                    # 训练室
-│   │   │   │   ├── Briefing/                        # 简报室
-│   │   │   │   ├── HeavyArmory/                     # 重型军械库
-│   │   │   │   └── VehicleBay/                      # 载具库
-│   │   │   │
-│   │   │   ├── TunnelSystem/                        # 地下隧道系统
-│   │   │   │   ├── MainTunnel
-│   │   │   │   ├── ServiceTunnel_A
-│   │   │   │   ├── ServiceTunnel_B
-│   │   │   │   ├── VentilationShafts/               # 通风管道
-│   │   │   │   │   ├── Vent_Main
-│   │   │   │   │   ├── Vent_LCZ
-│   │   │   │   │   └── Vent_HCZ
-│   │   │   │   └── EmergencyTunnel                  # 紧急逃生通道
-│   │   │   │
-│   │   │   ├── Checkpoints/
-│   │   │   │   └── Checkpoint_HCZ_Exit/
-│   │   │   │       ├── GateA/                       # A门
-│   │   │   │       │   ├── BlastDoor_Final
-│   │   │   │       │   ├── GuardStation
-│   │   │   │       │   └── Elevator_Surface
-│   │   │   │       └── GateB/                       # B门
-│   │   │   │           ├── BlastDoor_Final
-│   │   │   │           ├── GuardStation
-│   │   │   │           └── EscapeRoute
-│   │   │   │
-│   │   │   └── Corridors/
-│   │   │       ├── Hallway_HCZ_Main
-│   │   │       ├── Hallway_HCZ_SCP
-│   │   │       ├── Hallway_HCZ_Warhead
-│   │   │       └── Catwalk_HCZ
+│   │   │   └── SiteCommand/                         # 高管区域
+│   │   │       ├── SiteDirectorOffice               # 站点主管办公室
+│   │   │       └── PA_SystemRoom                    # 全图广播控制室
 │   │   │
-│   │   └── PocketDimension/                         # SCP-106 口袋维度
-│   │       ├── DistortedHallways/
-│   │       ├── TrapRooms/
-│   │       │   ├── TrapRoom_Pit
-│   │       │   ├── TrapRoom_Coffins
-│   │       │   └── TrapRoom_Throne
-│   │       └── ExitPortal
+│   │   ├── SectorE_HazardAndTesting/                # 🔴 扇区 E: 危险源与实验场 (病毒/SCP测试)
+│   │   │   ├── TestingChambers/                     # 测试区域
+│   │   │   │   ├── TestChamber_01/                  # 双层结构测试室
+│   │   │   │   │   ├── ObservationDeck              # 上层防弹观察室(科研/安保站立)
+│   │   │   │   │   └── ContainmentCell              # 下层收容隔间(D级人员进入)
+│   │   │   │   ├── TestChamber_02/
+│   │   │   │   └── GasChamber                       # 毒气测试室
+│   │   │   │
+│   │   │   ├── ContainmentZone/                     # 收容/感染区 (极度危险)
+│   │   │   │   ├── VirusGroundZero                  # 病毒泄露源头(感染者/怪物出生点)
+│   │   │   │   ├── SCP_Chambers/                    # 危险SCP收容室
+│   │   │   │   │   ├── Chamber_KeterClass
+│   │   │   │   │   └── Chamber_EuclidClass
+│   │   │   │   └── DarkCorridors                    # 闪烁红光、长满生物组织的黑暗走廊
+│   │   │   │
+│   │   │   └── WarheadSilo/                         # 净化核弹井 (终极销毁手段)
+│   │   │       ├── WarheadDevice
+│   │   │       └── ActivationPanel
+│   │   │
+│   │   └── SectorF_SurfaceExtraction/               # 🟠 扇区 F: 通往地表 (终极逃生区)
+│   │       ├── BlastDoors/                          # 防爆大门
+│   │       │   ├── Gate_A_Structure
+│   │       │   └── Gate_B_Structure
+│   │       ├── HeavyElevators/                      # 货运级超大电梯
+│   │       │   └── Elevator_Surface
+│   │       ├── SurfaceOutpost/                      # 地面哨所
+│   │       │   ├── Helipad                          # 逃生直升机停机坪
+│   │       │   ├── EvacTents                        # 临时撤离帐篷
+│   │       │   └── SniperTowers                     # 狙击塔
+│   │       └── PerimeterForest                      # 周边禁区森林
 │   │
-│   ├── FacilityInfrastructure/                      # ====== 设施基础设施 ======
+│   ├── FacilityInfrastructure/                      # ====== 设施基础设施 (逻辑组件库) ======
+│   │   │                                            # (保留了你极其优秀的原设计，仅重命名配合扇区)
+│   │   ├── Doors/                                   
+│   │   │   ├── StandardDoors/
+│   │   │   ├── KeycardDoors/
+│   │   │   ├── BlastDoors/
+│   │   │   ├── AirlockDoors/                        # 扇区交界处的双重气闸门
+│   │   │   └── ContainmentDoors/
 │   │   │
-│   │   ├── Doors/                                   # 所有门(按类型分组)
-│   │   │   ├── StandardDoors/                       # 标准门
-│   │   │   ├── KeycardDoors/                        # 钥匙卡门
-│   │   │   │   ├── Level1Doors/                     # 1级权限门
-│   │   │   │   ├── Level2Doors/                     # 2级权限门
-│   │   │   │   ├── Level3Doors/                     # 3级权限门
-│   │   │   │   ├── Level4Doors/                     # 4级权限门
-│   │   │   │   └── Level5Doors/                     # 5级(O5)权限门
-│   │   │   ├── BlastDoors/                          # 防爆门
-│   │   │   ├── AirlockDoors/                        # 气闸门
-│   │   │   └── ContainmentDoors/                    # 收容门
-│   │   │
-│   │   ├── Cameras/                                 # 监控摄像头
-│   │   │   ├── Camera_EZ_Lobby
-│   │   │   ├── Camera_EZ_Admin
-│   │   │   ├── Camera_EZ_Medical
-│   │   │   ├── Camera_LCZ_Hall_01
-│   │   │   ├── Camera_LCZ_ClassD
-│   │   │   ├── Camera_LCZ_914
-│   │   │   ├── Camera_HCZ_Hall_01
-│   │   │   ├── Camera_HCZ_049
-│   │   │   ├── Camera_HCZ_682
-│   │   │   ├── Camera_HCZ_Warhead
-│   │   │   ├── Camera_GateA
-│   │   │   ├── Camera_GateB
-│   │   │   └── Camera_Exterior_Gate
+│   │   ├── Cameras/                                 
+│   │   │   ├── Cameras_SectorA
+│   │   │   ├── Cameras_SectorB
+│   │   │   ├── Cameras_SectorC
+│   │   │   ├── Cameras_SectorD
+│   │   │   ├── Cameras_SectorE
+│   │   │   └── Cameras_SectorF
 │   │   │
 │   │   ├── Speakers/                                # 广播喇叭
-│   │   │   ├── Speaker_EZ_01
-│   │   │   ├── Speaker_LCZ_01
-│   │   │   ├── Speaker_HCZ_01
-│   │   │   └── Speaker_Exterior
-│   │   │
-│   │   ├── EmergencyLights/                         # 紧急照明
-│   │   │   ├── RedLights_EZ/
-│   │   │   ├── RedLights_LCZ/
-│   │   │   └── RedLights_HCZ/
-│   │   │
+│   │   ├── EmergencyLights/                         # 紧急照明(红光/停电时亮起)
 │   │   ├── Terminals/                               # 电脑终端
-│   │   │   ├── Terminal_Reception
-│   │   │   ├── Terminal_Security
-│   │   │   ├── Terminal_Research_01
-│   │   │   ├── Terminal_Research_02
-│   │   │   ├── Terminal_Medical
-│   │   │   ├── Terminal_SiteDirector
-│   │   │   └── Terminal_ServerRoom
-│   │   │
-│   │   ├── SCP914/                                  # SCP-914 交互结构
-│   │   │   ├── Machine
-│   │   │   ├── InputChute
-│   │   │   ├── OutputChute
-│   │   │   └── SettingKnob                          # Rough/Coarse/1:1/Fine/VeryFine
-│   │   │
-│   │   └── Signs/                                   # 标识牌
-│   │       ├── ZoneSigns/                           # 区域标识
-│   │       ├── DirectionSigns/                      # 方向指引
-│   │       ├── WarningSigns/                        # 警告标识
-│   │       ├── SCPContainmentSigns/                 # SCP编号标牌
-│   │       └── ClearanceSigns/                      # 权限等级标识
+│   │   ├── InteractableProps/                       # 掩体/储物箱/电脑椅等(分担性能)
+│   │   └── Signs/                                   # 墙面标识牌(极大帮助玩家在六大扇区寻路)
 │   │
-│   ├── Zones/                                       # 区域触发器(不可见Part)
-│   │   ├── ZoneTrigger_EntranceZone
-│   │   ├── ZoneTrigger_LightContainment
-│   │   ├── ZoneTrigger_HeavyContainment
-│   │   ├── ZoneTrigger_Surface
-│   │   ├── ZoneTrigger_PocketDimension
-│   │   ├── ZoneTrigger_ClassD_Block
-│   │   ├── ZoneTrigger_MedicalBay
-│   │   ├── ZoneTrigger_WarheadSilo
-│   │   ├── SafeZones/                               # 安全区域
-│   │   └── RestrictedZones/                         # 限制区域(越权警报)
+│   ├── Zones/                                       # ====== 区域触发器 (不可见Part) ======
+│   │   ├── ZoneTrigger_SectorA_Control
+│   │   ├── ZoneTrigger_SectorB_Medical
+│   │   ├── ZoneTrigger_SectorC_Tactical
+│   │   ├── ZoneTrigger_SectorD_Hub
+│   │   ├── ZoneTrigger_SectorE_Hazard
+│   │   ├── ZoneTrigger_SectorF_Surface
+│   │   ├── SafeZones/                               # 绝对安全区(如出生点无敌判定)
+│   │   └── RestrictedZones/                         # 限制区域(越权进入触发警报)
 │   │
-│   ├── SpawnLocations/                              # 出生点
-│   │   ├── Spawn_ClassD                             # D级人员出生
-│   │   ├── Spawn_Security                           # 安保出生
-│   │   ├── Spawn_Research                           # 研究员出生
-│   │   ├── Spawn_Medical                            # 医疗出生
-│   │   ├── Spawn_MTF                                # MTF出生
-│   │   ├── Spawn_CI                                 # 混沌分裂者出生(地面)
-│   │   ├── Spawn_SiteDirector                       # 设施主管出生
-│   │   └── Spawn_Spectator                          # 旁观者
+│   ├── SpawnLocations/                              # ====== 扇区化出生点 ======
+│   │   ├── SectorA_Spawns/
+│   │   │   ├── Spawn_ClassD                         # D级人员
+│   │   │   └── Spawn_Security                       # 安保人员
+│   │   ├── SectorB_Spawns/
+│   │   │   ├── Spawn_Scientist                      # 科学家
+│   │   │   └── Spawn_Medical                        # 医疗人员
+│   │   ├── SectorC_Spawns/
+│   │   │   └── Spawn_ArmedForces                    # 武装力量/MTF
+│   │   ├── SectorD_Spawns/
+│   │   │   ├── Spawn_Civilian                       # 文职人员(后勤/工程师/清洁工)
+│   │   │   └── Spawn_SiteDirector                   # 设施主管
+│   │   ├── SectorE_Spawns/
+│   │   │   ├── Spawn_Infected                       # 感染体/怪物
+│   │   │   └── Spawn_SCP                            # SCP实体
+│   │   ├── SectorF_Spawns/
+│   │   │   └── Spawn_ExtractionTeam                 # 外部救援/敌对入侵阵营
+│   │   └── Spawn_Spectator                          # 旁观者出生点
 │   │
-│   └── Interactables/                               # 通用可交互物体
-│       ├── KeycardReaders/                          # 钥匙卡读取器
-│       ├── Buttons/                                 # 按钮
-│       │   ├── DoorButtons/
-│       │   ├── ElevatorButtons/
-│       │   ├── LockdownButtons/
-│       │   └── IntercomButtons/
-│       ├── MedicalSupplies/                         # 医疗物资
-│       │   ├── FirstAidKit
-│       │   ├── MedKit
-│       │   └── SCP500Pill
-│       ├── Workstations/                            # 工作台
-│       │   ├── ResearchDesk
-│       │   ├── MedicalStation
-│       │   └── RepairStation
-│       └── Misc/
-│           ├── WaterFountain
-│           ├── VendingMachine
-│           └── Payphone
+│   └── Interactables/                               # ====== 通用可交互物体 ======
+│       ├── KeycardReaders/                          # 门禁读卡器
+│       ├── Buttons/                                 # 各种按钮
+│       ├── Pickups/                                 # 可拾取物(医疗包/枪械/手电筒)
+│       ├── Workstations/                            # 实验台/工作台
+│       └── Misc/                                    # 售货机/饮水机等RP道具
+│
 │
 │
 │ ══════════════════════════════════════════════════════════════════
