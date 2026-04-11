@@ -173,7 +173,6 @@ game (DataModel)
 │   │   │   ├── Spawn_InternalSecurityDept           # 内部安全部 (ISD)
 │   │   │   ├── Spawn_ExternalAffairs                # 对外事务部 (DEA)
 │   │   │   ├── Spawn_LogisticsArmory                # 后勤与军械部 (LAD)
-│   │   │   ├── Spawn_CommunicationsDivision         # 通讯部 (ComDiv)
 │   │   │   └── Spawn_DeconEngineering               # 净化与工程部 (D&E)
 │   │   │
 │   │   ├── SectorE_Spawns/                          # 🔴 扇区 E: 危险源与实验场
