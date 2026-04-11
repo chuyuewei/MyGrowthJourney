@@ -42,16 +42,14 @@ game (DataModel)
 │   │   │   │   ├── Med_SpawnArea                    # 医生出生点
 │   │   │   │   ├── EmergencyTriage                  # 紧急分诊大厅(大空间容纳伤员)
 │   │   │   │   ├── VirusQuarantineWards/            # 病毒隔离病房(玻璃墙)
-│   │   │   │   ├── SurgeryRooms/                    # 手术室
-│   │   │   │   ├── Morgue/                          # 停尸房(适合恐怖RP)
-│   │   │   │   └── BloodBank_Pharmacy               # 血库与药房
+│   │   │   │   └── SurgeryRooms/                    # 手术室
 │   │   │   │
 │   │   │   ├── ResearchLabs/                        # 科研部
 │   │   │   │   ├── Sci_SpawnArea                    # 科学家出生点
 │   │   │   │   ├── Lab_Biology                      # 生物/病毒化验室
 │   │   │   │   ├── Lab_Chemistry                    # 化学合成室
 │   │   │   │   ├── DataArchive                      # 资料档案库
-│   │   │   │   └── Safe_SCP_Storage/                # 安全级物品保管库(如万能药)
+│   │   │   │   └── Storage/                # 安全级物品保管库(如万能药)
 │   │   │   │
 │   │   │   └── Corridors/                           # 走廊
 │   │   │       └── Checkpoint_B_to_D                # 必须经过消毒程序的通道
@@ -104,26 +102,26 @@ game (DataModel)
 │   │   │       ├── WarheadDevice
 │   │   │       └── ActivationPanel
 │   │   │
-│   │   └── SectorF_SurfaceExtraction/               # 🟠 扇区 F: 通往地表 (终极逃生区)
-│   │       ├── BlastDoors/                          # 防爆大门
-│   │       │   ├── Gate_A_Structure
-│   │       │   └── Gate_B_Structure
-│   │       ├── HeavyElevators/                      # 货运级超大电梯
-│   │       │   └── Elevator_Surface
-│   │       ├── SurfaceOutpost/                      # 地面哨所
-│   │       │   ├── Helipad                          # 逃生直升机停机坪
-│   │       │   ├── EvacTents                        # 临时撤离帐篷
-│   │       │   └── SniperTowers                     # 狙击塔
-│   │       └── PerimeterForest                      # 周边禁区森林
+│   │   │── SectorF_SurfaceExtraction/               # 🟠 扇区 F: 通往地表 (终极逃生区)
+│   │   │   ├── BlastDoors/                          # 防爆大门
+│   │   │   │   ├── Gate_A_Structure
+│   │   │   │   └── Gate_B_Structure
+│   │   │   ├── HeavyElevators/                      # 货运级超大电梯
+│   │   │   │   └── Elevator_Surface
+│   │   │   ├── SurfaceOutpost/                      # 地面哨所
+│   │   │   │   ├── Helipad                          # 逃生直升机停机坪
+│   │   │   │   ├── EvacTents                        # 临时撤离帐篷
+│   │   │   │   └── SniperTowers                     # 狙击塔
+│   │   │   └── PerimeterForest                  # 周边禁区森林
+│   │   └── Doors/                                   
+│   │       ├── StandardDoors/
+│   │       ├── KeycardDoors/
+│   │       ├── BlastDoors/
+│   │       ├── AirlockDoors/                        # 扇区交界处的双重气闸门
+│   │       └── ContainmentDoors/
 │   │
 │   ├── FacilityInfrastructure/                      # ====== 设施基础设施 (逻辑组件库) ======
 │   │   │                                            # (保留了你极其优秀的原设计，仅重命名配合扇区)
-│   │   ├── Doors/                                   
-│   │   │   ├── StandardDoors/
-│   │   │   ├── KeycardDoors/
-│   │   │   ├── BlastDoors/
-│   │   │   ├── AirlockDoors/                        # 扇区交界处的双重气闸门
-│   │   │   └── ContainmentDoors/
 │   │   │
 │   │   ├── Cameras/                                 
 │   │   │   ├── Cameras_SectorA
