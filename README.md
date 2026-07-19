@@ -1,5 +1,3 @@
-# 🌱 MyGrowthJourney
-
 <div align="center">
 
 # 🌱 MyGrowthJourney
