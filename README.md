@@ -1,41 +1,164 @@
 # 🌱 MyGrowthJourney
 
-![Status](https://img.shields.io/badge/status-Active%20Learning-success)
-![Last Commit](https://img.shields.io/badge/更新中-✍️-blue)
+<div align="center">
 
-> “种一棵树最好的时间是十年前，其次是现在。”
+# 🌱 MyGrowthJourney
 
-欢迎来到我的成长之旅！👋 这个仓库用于记录我的学习笔记、项目实践、技术踩坑与个人感悟。它不仅是一个知识库，更是我持续探索和突破自我的见证。
+**Building Knowledge • Creating Projects • Recording Growth**
 
----
+![Status](https://img.shields.io/badge/Status-Active%20Learning-success?style=for-the-badge)
+![Learning](https://img.shields.io/badge/Learning-Everyday-blue?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/YOUR_USERNAME/MyGrowthJourney?style=for-the-badge)
 
-## 📂 目录导航
+> *"The best time to plant a tree was ten years ago. The second best time is now."*
 
-- 📝 **`/Plan`** - 工程计划
-- 💻 **`/Projects`** - 实战项目与代码片段
-- Other (idk)
+记录成长，而不仅仅是代码。
 
-## 🚀 成长里程碑
-
-- 🎉 **[!!!!-!!-!!]** - 创建 `MyGrowthJourney` 仓库，开始系统化记录
-- 🚀 **[????-??-??]** - 完成了Lua的入门学习
-- 🏆 **[@@@@-@@-@@]** - 实现了PLANNNNNNNN---
-
-## 🛠️ 技能栈
-
-**目前正在使用：** 
-`[Lua]` `[Golang]` `[Git]` `[Rust]`
-
-**正在学习：** 
-`[C/C++]` `[FPS COMBAT(HAHA)]`
-
-## 💡 联系我
-
-如果你对我的记录感兴趣，或者想一起交流学习，欢迎联系我：
-
-- 📧 **邮箱**: [3140194376@qq.com]
-- 🌐 **个人博客**: 无(HAHA)
+</div>
 
 ---
 
-⭐ **如果这个仓库对你有所启发，欢迎点个 Star，让我们共同成长！**
+# 📖 关于这个仓库
+
+欢迎来到 **MyGrowthJourney** 👋
+
+这里记录着我的整个学习历程，包括：
+
+* 📚 学习笔记
+* 💻 项目实践
+* 🔥 技术踩坑
+* ⚡ 开发经验
+* 📝 灵感与思考
+* 🎯 长期规划
+
+我希望把它建设成一个持续更新的知识仓库（Knowledge Base），见证自己的成长，也希望能够帮助到后来者。
+
+---
+
+# 📂 Repository Structure
+
+```text
+MyGrowthJourney
+│
+├── 📁 Plan/          # 学习计划、路线图
+├── 📁 Projects/      # 项目实践
+├── 📁 Notes/         # 学习笔记
+├── 📁 Docs/          # 技术文档
+└── README.md
+```
+
+---
+
+# 🎯 当前目标
+
+目前正在专注于以下方向：
+
+* Roblox 开发
+* Lua 编程
+* Golang 后端开发
+* Rust 学习
+* Git 工作流
+* 游戏服务器开发
+* FPS Gameplay
+* 大世界多人游戏架构
+
+未来希望能够独立开发一款大型多人在线游戏。
+
+---
+
+# 🚀 Learning Roadmap
+
+## ✅ 已完成
+
+* [✅] 创建 MyGrowthJourney
+* [✅] 建立知识管理体系
+
+## 🚧 进行中
+
+* [ ] Lua 深入学习
+* [ ] Golang 基础
+* [ ] Git 熟练使用
+* [ ] Rust 入门
+* [✅] Roblox 开发实践
+
+## 🎯 下一步
+
+* [ ] C/C++
+* [ ] ECS 架构
+* [ ] 网络同步
+* [ ] 游戏服务器
+* [ ] 大规模多人联机技术
+
+---
+
+# 🛠️ Tech Stack
+
+### Languages
+
+* Lua
+* Go
+* Rust
+* C/C++ (Learning)
+
+### Tools
+
+* Git
+* GitHub
+* Visual Studio Code
+* Roblox Studio
+
+### Interests
+
+* Multiplayer Games
+* FPS Combat
+* MMO
+* Network Programming
+* Backend Development
+
+---
+
+# 📈 Milestones
+
+| 日期         | 事件                    |
+| ---------- | --------------------- |
+| 忘了       | 🎉 创建 MyGrowthJourney |
+| 忘了       | 🚀 完成 Lua 学习          |
+| 没有        | 💻 完成第一个完整项目          |
+| 没有        | 🌍 发布个人大型项目           |
+
+---
+
+# 📚 更新内容
+
+这个仓库将持续更新：
+
+* 学习笔记
+* 项目源码
+* 开发日志
+* Bug 记录
+* 开发心得
+* 优秀资源整理
+
+---
+
+# 🤝 Connect
+
+如果你也热爱编程、游戏开发或技术探索，欢迎一起交流。
+
+📧 Email
+
+```
+3140194376@qq.com
+```
+
+---
+
+<div align="center">
+
+### 🌱 Never Stop Learning
+
+**Every commit is a step forward.**
+
+⭐ 如果这个仓库对你有所帮助，欢迎点一个 Star！
+
+</div>
